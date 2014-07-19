@@ -1,7 +1,18 @@
 doctype html
 html
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    block title
+      title WallPaper
+    meta(name="viewport", content="width=device-width,initial-scale=1")
+    script(src="/javascripts/libs/modernizr.min.js")
+    script(src="/javascripts/libs/jquery-1.10.2.min.js")
+    script(src="/javascripts/libs/jquery-ui.min.js")
+    script(src="/javascripts/libs/bootstrap.min.js")
+    script(src="/javascripts/general.js")
+
+    link(rel="stylesheet", media="screen", href="/stylesheets/bootstrap.css")
+    link(rel='stylesheet', media="screen", href='/stylesheets/style.css')
   body
-    block content
+    div(class="body-wrap")
+      div(class="container")
+        block content
