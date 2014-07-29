@@ -4,9 +4,11 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var login = require('./routes/login');
 
 var app = express();
 
@@ -21,8 +23,36 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//var connect = require('connect');
+var weibo = require('weibo');
+
+//weibo.init('weibo', '$appkey', '$secret');
+weibo.init('weibo', '2069219855', '909918af036010b953986a9a8b34f90b');
+
+app.use(session({ secret: "oh year a secret" }));
+
+app.use(
+    // using weibo.oauth middleware for use login
+    // will auto save user in req.session.oauthUser
+
+    weibo.oauth({
+	loginPath: '/login',
+	logoutPath: '/logout',
+	blogtypeField: 'type',
+	afterLogin: function (req, res, callback) {
+	    console.log(req.session.oauthUser.screen_name, 'login success');
+	    process.nextTick(callback);
+	},
+	beforeLogout: function (req, res, callback) {
+	    console.log(req.session.oauthUser.screen_name, 'loging out');
+	    process.nextTick(callback);
+	}
+    })
+);
+
 app.use('/', routes);
 app.use('/users', users);
+app.use('/login', login);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
