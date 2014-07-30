@@ -1,6 +1,12 @@
 extends layout
 
 block content
-
-  p
-    a(href="/login?type=weibo") Weibo
+  if user
+    p
+      img(src=user.profile_image_url)
+      a(href=user.t_url) #{user.screen_name}
+      a(href='/logout') Logout
+        
+  else
+    p
+      a(href="/login?type=weibo") Weibo
