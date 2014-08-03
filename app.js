@@ -22,7 +22,6 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//var connect = require('connect');
 var weibo = require('weibo');
 
 //weibo.init('weibo', '$appkey', '$secret');
@@ -33,12 +32,13 @@ app.use(session({ secret: "oh year a secret" }));
 app.use(
     // using weibo.oauth middleware for use login
     // will auto save user in req.session.oauthUser
-
     weibo.oauth({
 	loginPath: '/login',
 	logoutPath: '/logout',
 	blogtypeField: 'type',
 	afterLogin: function (req, res, callback) {
+	    console.log(req.session.oauthUser);
+	    //var user = new User;
 	    console.log(req.session.oauthUser.screen_name, 'login success');
 	    process.nextTick(callback);
 	},
