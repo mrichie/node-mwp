@@ -1,12 +1,7 @@
 extends layout
 
 block content
-  if user
-    p
-      img(src=user.profile_image_url)
-      a(href=user.t_url) #{user.screen_name}
-      a(href='/logout') Logout
-        
-  else
-    p
-      a(href="/login?type=weibo") Weibo
+  script(type="text/x-handlebars-template" id="slider-tpl")
+    {{>slider slider}}
+  script(type='text/javascript')
+    $(function() { init_slider() }); 

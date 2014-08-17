@@ -1,0 +1,12 @@
+/* Write your styles */
+    .head-fixed {
+      padding-top: 50px;
+    }
+    .head {
+      margin-bottom: 0;
+      width: 100%;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+    }
