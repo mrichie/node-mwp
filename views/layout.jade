@@ -27,10 +27,12 @@ html
         a(href="#") 微壁纸
       div(class="am-collapse am-topbar-collapse" id="collapse-head")
         ul(class="am-nav am-nav-pills am-topbar-nav")
-          li(class="am-active")
-            a(href="#") 首页
+          li
+            a(href="/") 首页
           li
             a(href="#") 搜索
+          li
+            a(href="/uploader") 我要上传
 
         div(class="am-topbar-right")
           if user
@@ -38,7 +40,6 @@ html
             a(href='/logout') 注销
           else
             a(href="/login?type=weibo" class="am-btn am-btn-secondary am-topbar-btn am-btn-sm")
-              span(class="am-icon-user")
-                微博登陆
+              span(class="am-icon-user") 微博登陆
 
    block content
